@@ -1,0 +1,26 @@
+###
+POST http://localhost:3000/auth/signup
+content-type: application/json
+
+{
+    "email": "abcd@gmail.com",
+    "password": "abcd1234"
+}
+
+###Find a user with a given id
+
+GET http://localhost:3000/auth/3
+
+
+###Find a user with a given email
+GET http://localhost:3000/auth?email=abcd@gmail.com
+
+### Update user
+PATCH  http://localhost:3000/auth/4 
+content-type: application/json
+
+{
+    "email":"asdf4@gmail.com"
+}
+### Delete a user
+DELETE http://localhost:3000/auth/1
