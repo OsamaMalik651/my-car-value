@@ -32,7 +32,15 @@ export class UsersController {
     session.userId = user.id;
     return user;
   }
+  @Get('/whoami')
+  whoAmI(@Session() sessoin: any) {
+    return this.usersService.findOne(sessoin.userId);
+  }
 
+  @Post('/signout')
+  signOut(@Session() session: any) {
+    session.userId = null;
+  }
   @Post('/signin')
   async signIn(@Body() body: CreateUserDto, @Session() session: any) {
     const user = await this.authService.signin(body.email, body.password);

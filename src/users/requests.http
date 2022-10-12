@@ -15,8 +15,14 @@ content-type: application/json
      "email": "abcd34@gmail.com",
     "password": "abcd1234"
 }
-###Find a user with a given id
 
+###Signout currently signed in user
+POST http://localhost:3000/auth/signout
+
+###Get the currently signed in user
+GET http://localhost:3000/auth/whoami
+
+###Find a user with a given id
 GET http://localhost:3000/auth/3
 
 
