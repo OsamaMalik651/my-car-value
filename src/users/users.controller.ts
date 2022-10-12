@@ -8,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  Session,
   UseInterceptors,
 } from '@nestjs/common';
 import { Serialize } from 'src/interceptors/serialize.interceptor';
@@ -25,14 +26,18 @@ export class UsersController {
     private authService: AuthService,
   ) {}
   @Post('/signup')
-  createUser(@Body() body: CreateUserDto) {
+  async createUser(@Body() body: CreateUserDto, @Session() session: any) {
     // this.usersService.create(body.email, body.password);
-    return this.authService.signup(body.email, body.password);
+    const user = await this.authService.signup(body.email, body.password);
+    session.userId = user.id;
+    return user;
   }
 
   @Post('/signin')
-  signIn(@Body() body: CreateUserDto) {
-    return this.authService.signin(body.email, body.password);
+  async signIn(@Body() body: CreateUserDto, @Session() session: any) {
+    const user = await this.authService.signin(body.email, body.password);
+    session.userId = user.id;
+    return user;
   }
 
   @Get('/:id')
